@@ -39,6 +39,7 @@
             this.cheeranonymousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subscriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giftSubscriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.followerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -92,7 +93,8 @@
             this.cheerToolStripMenuItem,
             this.cheeranonymousToolStripMenuItem,
             this.subscriptionToolStripMenuItem,
-            this.giftSubscriptionToolStripMenuItem});
+            this.giftSubscriptionToolStripMenuItem,
+            this.followerToolStripMenuItem});
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(44, 30);
             this.testToolStripMenuItem.Text = "Test";
@@ -145,6 +147,13 @@
             this.giftSubscriptionToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.giftSubscriptionToolStripMenuItem.Text = "Gift Subscription";
             this.giftSubscriptionToolStripMenuItem.Click += new System.EventHandler(this.giftSubscriptionToolStripMenuItem_Click);
+            // 
+            // followerToolStripMenuItem
+            // 
+            this.followerToolStripMenuItem.Name = "followerToolStripMenuItem";
+            this.followerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.followerToolStripMenuItem.Text = "Follower";
+            this.followerToolStripMenuItem.Click += new System.EventHandler(this.followerToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -310,7 +319,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Twitch Companion App 2.0 - Deep Rock Galactic";
+            this.Text = "Twitch Companion App 2.6 - Deep Rock Galactic";
             this.Load += new System.EventHandler(this.Form1_LoadAsync);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -350,6 +359,7 @@
         private System.Windows.Forms.ToolStripMenuItem subscriptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem giftSubscriptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cheeranonymousToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem followerToolStripMenuItem;
     }
 }
 

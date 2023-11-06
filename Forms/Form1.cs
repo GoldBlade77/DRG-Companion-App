@@ -13,6 +13,7 @@ using TwitchLib.PubSub.Events;
 using ViewerInteractivity.Twitch;
 using ViewerInteractivity.Settings;
 
+
 namespace ViewerInteractivity
 {
     public partial class Form1 : Form
@@ -21,6 +22,7 @@ namespace ViewerInteractivity
         const string ClientID = ""; // SECRET <- I REMOVED IT FOR SECURITY.
         const string ChatBufferFilename = @"TwitchMod\ChatBuffer.txt";
         const string EventBufferFilename = @"TwitchMod\EventBuffer.txt";
+        const string ReceiveBufferFilename = @"TwitchMod\ReceiveBuffer.txt";
         public string UserLoginName { get; set; }
         public string AuthToken { get; set; }
         public string ChannelID { get; set; }
@@ -354,7 +356,6 @@ namespace ViewerInteractivity
         
         private void WriteEventBuffer()
         {
-
             try
             {
                 string eventFilePath = GetEventBufferFilePath();
@@ -380,11 +381,55 @@ namespace ViewerInteractivity
             }
         }
 
+        private void ReadReceiveBuffer()
+        {
+            try
+            {
+                string filePath = GetReceiveBufferFilePath();
+                if (!File.Exists(filePath)) return;
+
+                string bufferContent = File.ReadAllText(filePath);
+
+                // Clears the buffer for the next command
+                File.WriteAllText(filePath, "");
+
+                if (!string.IsNullOrWhiteSpace(bufferContent))
+                {
+                    string[] splits = bufferContent.Split('~');
+                    if (splits.Length >= 2)
+                    {
+                        string cmd = splits[0];
+                        string datastr = splits[1];
+
+                        switch (cmd)
+                        {
+                            case "chatmsg":
+                                {
+                                    if (voteBot2 != null)
+                                    {
+                                        voteBot2.SendChatMessage(datastr);
+                                    }
+                                } break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         private void bufferTimer_Tick(object sender, EventArgs e)
         {
             WriteChatBuffer();
             WriteEventBuffer();
+            ReadReceiveBuffer();
+        }
 
+        public string GetReceiveBufferFilePath()
+        {
+            return Path.Combine(ModsDirectory, ReceiveBufferFilename);
         }
 
         public string GetChatBufferFilePath()
@@ -511,6 +556,11 @@ namespace ViewerInteractivity
         private void giftSubscriptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddChannelEvent("giftsub", "Karl", "", "1000", "4", "", "");
+        }
+
+        private void followerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddChannelEvent("follow", "Karl", "", "", "", "", "");
         }
     }
 }

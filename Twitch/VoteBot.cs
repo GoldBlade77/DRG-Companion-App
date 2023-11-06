@@ -13,7 +13,7 @@ namespace ViewerInteractivity.Twitch
 {
     public class VoteBot
     {
-        TwitchClient client;
+        public TwitchClient client;
 
         string _channelName;
 
@@ -47,6 +47,15 @@ namespace ViewerInteractivity.Twitch
             client.OnReconnected += Client_OnReconnected;
 
             client.Connect();
+        }
+
+        public void SendChatMessage(string message)
+        {
+            try
+            {
+                client.SendMessage(_channelName, message);
+            }
+            catch { }
         }
 
         private void Client_OnReconnected(object sender, TwitchLib.Communication.Events.OnReconnectedEventArgs e)
